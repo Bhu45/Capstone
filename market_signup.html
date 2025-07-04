@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup/Login Page</title>
+  
+  <style>
+    :root {
+      --primary-color: #4a6bff;
+      --secondary-color: #6c757d;
+      --success-color: #28a745;
+      --error-color: #dc3545;
+      --light-gray: #f8f9fa;
+      --border-color: #dee2e6;
+      --text-color: #212529;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7ff;
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    .auth-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .auth-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .auth-tabs button {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      background: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .auth-tabs button.active {
+      color: var(--primary-color);
+      border-bottom: 3px solid var(--primary-color);
+    }
+
+    .auth-form {
+      padding: 2rem;
+      display: none;
+    }
+
+    .auth-form.active {
+      display: block;
+    }
+
+    .auth-form h2 {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(74, 107, 255, 0.2);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #3a5bef;
+    }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--secondary-color);
+    }
+
+    .auth-footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .forgot-password {
+      display: block;
+      text-align: right;
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+      margin-top: 0.5rem;
+    }
+
+    .terms {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+    }
+
+    .terms input {
+      width: auto;
+      margin-right: 0.5rem;
+    }
+
+    .location-section {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background-color: var(--light-gray);
+      border-radius: 8px;
+    }
+
+    .location-section h3 {
+      margin-top: 0;
+      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+      color: var(--secondary-color);
+    }
+
+    .map-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background-color: white;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .map-button:hover {
+      background-color: var(--light-gray);
+    }
+
+    #map-preview {
+      height: 200px;
+      margin-top: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .username-availability {
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .auth-container {
+        margin: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-tabs">
+        <button class="active" id="login-tab">Login</button>
+        <button id="signup-tab">Sign Up</button>
+    </div>
+
+    <form id="signup-form" class="auth-form active">
+        <h2>Create Your Account</h2>
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required placeholder="Enter your full name">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" required placeholder="+91 XXXXXXXXXX">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required placeholder="Choose a username">
+          <small class="username-availability"></small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" required placeholder="Create password">
+          </div>
+          <div class="form-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input type="password" id="confirm-password" name="confirm-password" required placeholder="Re-enter password">
+          </div>
+        </div>
+
+        <div class="location-section">
+          <h3>Location Details</h3>
+          <div class="form-group">
+              <label for="country">Country</label>
+              <input type="text" id="country" name="country" placeholder="country">
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" required placeholder="Enter state">
+              </div>
+              <div class="form-group">
+                <label for="district">District</label>
+                <input type="text" id="district" name="district" required placeholder="Enter district">
+              </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group">
+                  <label for="block">Block</label>
+                  <input type="text" id="block" name="block" placeholder="block">
+              </div>
+              <div class="form-group">
+                  <label for="market">Nearby Market</label>
+                  <input type="text" id="market" name="market" placeholder="Nearest market or landmark">
+              </div>
+          </div>
+        </div>
+
+        <div class="form-group terms">
+          <input type="checkbox" id="terms" name="terms" required>
+          <label for="terms">I agree to the Terms of Service and Privacy Policy</label>
+        </div>
+
+        <button type="submit" class="submit-btn">Create Account</button>
+        <div class="auth-footer">
+          Already have an account? <a href="#" class="switch-to-login">Log in</a>
+        </div>
+    </form>
+
+    <form id="login-form" class="auth-form">
+        <h2>Welcome Back</h2>
+        <div class="form-group">
+            <label for="login-username">Username or Email</label>
+            <input type="text" id="login-username" name="username" required placeholder="Enter your username or email">
+        </div>
+        <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" required placeholder="Enter your password">
+            <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+        <a href="market.html">
+        <button class="submit-btn" >Log In</button></a>
+        <div class="auth-footer">
+          Don't have an account? <a href="#" class="switch-to-signup">Sign up</a>
+        </div>
+    </form>
+  </div>
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      const signupTab = document.getElementById('signup-tab');
+      const loginTab = document.getElementById('login-tab');
+      const signupForm = document.getElementById('signup-form');
+      const loginForm = document.getElementById('login-form');
+
+      signupTab.addEventListener('click', function(e) {
+        e.preventDefault();
+        signupTab.classList.add('active');
+        loginTab.classList.remove('active');
+        signupForm.classList.add('active');
+        loginForm.classList.remove('active');
+      });
+
+      loginTab.addEventListener('click', function(e) {
+        e.preventDefault();
+        loginTab.classList.add('active');
+        signupTab.classList.remove('active');
+        loginForm.classList.add('active');
+        signupForm.classList.remove('active');
+      });
+
+      document.querySelectorAll('.switch-to-login').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          loginTab.click();
+        });
+      });
+
+      document.querySelectorAll('.switch-to-signup').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          signupTab.click();
+        });
+      });
+
+      const password = document.getElementById('password');
+      const confirmPassword = document.getElementById('confirm-password');
+
+      function validatePassword() {
+        if (password.value !== confirmPassword.value) {
+          confirmPassword.setCustomValidity("Passwords don't match");
+        } else {
+          confirmPassword.setCustomValidity('');
+        }
+      }
+
+      password.addEventListener('change', validatePassword);
+      confirmPassword.addEventListener('keyup', validatePassword);
+
+      const usernameInput = document.getElementById('username');
+      const usernameAvailability = document.querySelector('.username-availability');
+
+      usernameInput.addEventListener('blur', function() {
+        if (usernameInput.value.length > 0) {
+          setTimeout(() => {
+            const isAvailable = Math.random() > 0.5;
+            usernameAvailability.textContent = isAvailable ? '✓ Username available' : '✗ Username taken';
+            usernameAvailability.style.color = isAvailable ? 'green' : 'red';
+          }, 500);
+        }
+      });
+
+      // Start with login tab active
+      loginTab.click();
+
+      signupForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(signupForm);
+        let output = "";
+        formData.forEach((value, key) => {
+          output += `${key}: ${value}\n`;
+        });
+        const blob = new Blob([output], { type: 'text/plain' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'user_data.txt';
+        a.click();
+        alert('Form submitted. Your data has been saved as user_data.txt.');
+      });
+
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Login form would be submitted here');
+      });
+    });
+  </script>
+</body>
+</html>

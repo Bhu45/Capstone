@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farmer Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(rgb(102, 217, 249),rgb(186, 222, 235),rgb(223, 197, 94),rgb(66, 204, 133),rgb(34, 164, 22),rgb(8, 76, 143));
+      color: #333;
+    }
+    header {
+      background-color: #ffd641;
+      color: rgb(11, 0, 0);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .home-link {
+      text-decoration: none;
+      color: rgb(24, 3, 3);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 5em;
+    }
+
+
+/* ------------------------priority 1------------------------------------- */
+    .priority1 {
+      display: flex;
+      flex-direction: row;
+      gap: .5rem;
+    }
+    /* ------------------------------weather info----------------------------------- */
+    .WheatherCard { 
+      background: linear-gradient(rgb(113, 207, 213),rgb(225, 150, 43),rgb(253, 253, 156),rgb(193, 238, 243),rgb(22, 200, 120),rgb(34, 2, 115));
+      padding: 0.5rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: left;
+      transition: transform 0.2s ease;
+      width:40%;
+      height: 20em;
+    }
+    .example {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    /* ----------------------------end weather */
+    
+
+    /* --------------------your crop--------------------------- */
+    .yourCropCard {
+      background-color: white;
+      padding: 0.2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      overflow: auto;
+      width:60%;
+      height: 20em;
+    }
+    .cropElementCard {
+      box-sizing: content-box;
+      background-color: #beedd2;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: justify;
+    }
+    .addcrop {
+      text-align:center;
+      background-color: #ffdf69;
+      border-radius: 50px;
+    }
+    .alignleft {
+      float: left;
+    }
+    .alignright {
+      float: right;
+    }
+    /* --------------end your crop */
+  /* ----------------------end of priority1 ------------------ */
+
+  /* ---------------------------priority 2 ------------------------------*/
+    .priority2 {
+      display: flex;
+      flex-direction: row;
+      gap: .5rem;
+    }
+    .appointments {
+      background-color: rgb(249, 229, 158);
+      padding: 0.2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      overflow: auto;
+      width:100%;
+      height: 20em;
+    }
+    .appointmentCard {
+      box-sizing: content-box;
+      background-color: #8ec8c6;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: justify;
+      gap: 0.2rem;
+    }
+    /* -----------------------------Message cards pop up----------------------------*/
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup-card {
+      background: rgb(238, 232, 232);
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      position: relative;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px; right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #6b0101;
+    }
+
+    .open-btn {
+      padding: 1px 2px;
+      font-size: 10px;
+      cursor: pointer;
+      width: max-content;
+      height: max-content;
+      border-radius: 20px;
+      background-color: rgb(202, 202, 255);
+    }
+    /* ----------------------------end popup */
+    /* --------------------------------priority 3-------------------------------- */
+    .priority3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      background-color: white;
+      padding: 1rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      align-content: center;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+    .moreFeatures {
+      background-color: #c9f4c0;
+      padding: 1rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      align-content: center;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+    }
+    .featureIcon {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background-color: #c9f4c0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 4px 8px rgb(145, 143, 143);
+    }
+    .moreFeatures:hover {
+      transform: translateY(-5px);
+      background-color: #eef9f0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      background-color: #eee;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="home-link">← Home</a>
+    <div>Farmer Dashboard</div>
+  </header>
+  <marquee scrollamount="5" style="background-color: #db1010;">
+    Top 3 news from agricultural department in a row &emsp;||&emsp; News 1 &emsp;||&emsp; News 2 &emsp;||&emsp; News 3
+  </marquee>
+  <main>
+    <h1>Welcome!</h1>
+
+
+    <div class="priority1">
+
+      <div class="WheatherCard">
+        <h2 style="text-align: left; font-size: 350%;">&#9925</h2>
+        <p><h2>Weather</h2></p>
+        <p>Temp:-28<sup>o</sup>C</p>
+        <p>Wind:-20km</p>
+        <p>aqi:-136</p>
+        <marquee scrollamount="14">Status: Favourable</marquee>
+        <marquee scrollamount="15">Suggestion 1 : Best time to bow seed 1 for crop 1</marquee>
+        <marquee scrollamount="8">Suggestion 2 : About to rain in few days hene do not water crop 2</marquee>
+        <marquee scrollamount="10">Suggestion 3 : As per your locality you can try crop 3 if your farm is upto the requirements : near to canal, availability of biodegraded organic composts</marquee>
+        <marquee scrollamount="20">Status: Favourable</marquee>
+      </div>
+
+      <div class="yourCropCard">
+        <p><h2>Your Crop Inventory</h2></p>
+        <div class="cropElementCard">
+          <div id="textbox">
+            <p class="alignleft">Crop 1</p>
+            <p class="alignright">Left: 2468 kg</p>
+          </div><div style="clear:both;"></div>
+          <p>Price: 35 Rs/kg</p>
+        </div>
+        <div class="cropElementCard">
+          <div id="textbox">
+            <p class="alignleft">Crop 2</p>
+            <p class="alignright">Left: 1357 kg</p>
+          </div><div style="clear:both;"></div>
+          <p>Price: 78 Rs/kg</p>
+        </div>
+        <div class="cropElementCard">
+          <div id="textbox">
+            <p class="alignleft">Crop 3</p>
+            <p class="alignright">Left: 1000 kg</p>
+          </div><div style="clear:both;"></div>
+          <p>Price: 104 Rs/kg</p>
+        </div>
+        <div class="cropElementCard">
+          <div id="textbox">
+            <p class="alignleft">Crop 4</p>
+            <p class="alignright">Left: 2000 kg</p>
+          </div><div style="clear:both;"></div>
+          <p>Price: 94 Rs/kg</p>
+        </div>
+        
+        <div class="addcrop">
+          <p font-size="10rem">&#128933</p>
+          <p>add</p>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="priority2">
+      <div class="appointments">
+       <h2>Appointments</h2>
+       <div class="appointmentCard">
+          <div id="textbox">
+            <p class="alignleft">Date: dd/mm/yyyy</p>
+            <p class="alignright">Time: 12:00 pm</p>
+            <br>
+            <p class="alignleft">Team: buyer 1</p>
+            <p class="alignright">To buy crop1</p>
+          </div><div style="clear:both;"></div>
+          <button class="open-btn" onclick="showPopup('message_team1')">Message</button>
+          <div class="popup-overlay" id="message_team1">
+            <div class="popup-card">
+              <span class="close-btn" onclick="closePopup('message_team1')">&times;</span>
+                <h2>Message from Buyer team 1</h2>
+                <p><a href="tel: 9263605345">Call Us</a></p>
+              </div>
+            </div>
+        </div>
+          <div class="appointmentCard">
+          <div id="textbox">
+            <p class="alignleft">Date: dd/mm/yyyy</p>
+            <p class="alignright">Time: 12:00 pm</p>
+            <br>
+            <p class="alignleft">Team: Govt officials</p>
+            <p class="alignright">To test crop4</p>
+          </div><div style="clear:both;"></div>
+          <button class="open-btn" onclick="showPopup('message_team4')">Message</button>
+           <div class="popup-overlay" id="message_team4">
+             <div class="popup-card">
+               <span class="close-btn" onclick="closePopup('message_team4')">&times;</span>
+                 <h2>Message from Govt officials</h2>
+                <p>na</p>
+              </div>
+            </div>
+          </div>
+
+        <div class="appointmentCard">
+          <div id="textbox">
+            <p class="alignleft">Date: dd/mm/yyyy</p>
+            <p class="alignright">Time: 12:00 pm</p>
+            <br>
+            <p class="alignleft">Team: buyer 2</p>
+            <p class="alignright">To buy crop2</p>
+          </div><div style="clear:both;"></div>
+          <button class="open-btn" onclick="showPopup('message_team2')">Message</button>
+           <div class="popup-overlay" id="message_team2">
+             <div class="popup-card">
+               <span class="close-btn" onclick="closePopup('message_team2')">&times;</span>
+                 <h2>Message from Buyer team 2</h2>
+                <p><a href="tel: 6204915086">Call Us</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="appointmentCard">
+          <div id="textbox">
+            <p class="alignleft">Date: dd/mm/yyyy</p>
+            <p class="alignright">Time: 12:00 pm</p>
+            <br>
+            <p class="alignleft">Team: buyer 3</p>
+            <p class="alignright">To buy crop3</p>
+          </div><div style="clear:both;"></div>
+          <button class="open-btn" onclick="showPopup('message_team3')">Message</button>
+           <div class="popup-overlay" id="message_team3">
+             <div class="popup-card">
+               <span class="close-btn" onclick="closePopup('message_team3')">&times;</span>
+                 <h2>Message from Buyer team 3</h2>
+                <p><a href="tel: 9876543210">Call Us</a></p>
+              </div>
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+     <script>
+    function showPopup(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closePopup(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+   <br>
+    <script>
+      function showTab(index) {
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach((tab, i) => {
+          tab.classList.toggle('active', i === index);
+          contents[i].classList.toggle('active', i === index);
+        });
+      }
+    </script>
+
+
+
+    <div class="priority3">
+      <div class="moreFeatures ">
+          <div class="featureIcon">
+            <h1>&#x1F69C;</h1>
+          </div>
+          <h3>Book Tractor</h3>
+      </div>
+
+      <div class="moreFeatures ">
+          <div class="featureIcon">
+            <h1>&#127806;</h1>
+          </div>
+          <h3>Buy fertilizer</h3>
+      </div>
+
+      <div class="moreFeatures ">
+          <div class="featureIcon">
+            <h1>&#127793;</h1>
+          </div>
+          <h3>Buy Seeds</h3>
+      </div>
+
+      <div class="moreFeatures ">
+          <div class="featureIcon">
+            <h1>&#128101;</h1>
+          </div>
+          <h3>Book Workers</h3>
+      </div>
+      <div class="moreFeatures ">
+          <div class="featureIcon">
+            <h1>&#8984;</h1>
+          </div>
+          <h3>Equipments/services</h3>
+      </div>
+
+      <div class="moreFeatures ">
+          <div class="featureIcon">
+            <h1>&#128110;</h1>
+          </div>
+          <h3>Book farm visit for government officials</h3>
+      </div>
+
+      <div class="moreFeatures ">
+          <div class="featureIcon">
+            <h1>&#128172;</h1>
+          </div>
+          <h3>Talk to your ai</h3>
+      </div>
+
+      <div class="moreFeatures ">
+          <div class="featureIcon">
+            <h1>&#128300;</h1>
+          </div>
+          <h3>Book soil sample test</h3>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 AgriConnect | Helping Farmers Thrive 🌾🌾
+  </footer>
+</body>
+</html>

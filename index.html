@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AGroW</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #7a2e2e;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8rem 2rem;
+      background: linear-gradient(rgb(130, 202, 222),rgb(122, 173, 225),rgb(225, 204, 204),rgb(245, 245, 171),rgb(145, 255, 135));
+      color: white;
+    }
+
+    header .Welcome {
+      font-size: 10vw;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+      color: #333;
+    }
+
+    .section {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .section:hover {
+      transform: scale(1.1);
+      background-color: #61e6ed;
+    }
+
+    .section h2 {
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    } 
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#" class="Welcome">Welcome</a>
+  </header>
+
+  <main class="container">
+    <a href="farmer_signup.html" class="section">
+      <h2>Farmers</h2>
+      <p>Access resources and tools for farmers</p>
+    </a>
+
+    <a href="market_signup.html" class="section">
+      <h2>Marketplace</h2>
+      <p>Find fresh farm products and connect with farmers</p>
+    </a>
+
+    <a href="services.html" class="section">
+      <h2>Services</h2>
+      <p>Service mens</p>
+    </a>
+  </main>
+</body>
+</html>

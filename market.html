@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buyer Section</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #3d9970;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .home-link {
+      text-decoration: none;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 1.5rem 0;
+      color: #3d9970;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .tab-button {
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .tab-button.active {
+      background-color: #3d9970;
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 1rem 2rem;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill); /* Example: columns of at least 100px, distributing remaining space */
+      grid-template-rows: repeat(auto-fill);   /* Example: rows of at least 50px, distributing remaining space */
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      margin-bottom: 0.3rem;
+      color: #3d9970;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .ratings {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1rem;
+      background-color: #eee;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="home-link">← Home</a>
+    <div>Buyer Dashboard</div>
+  </header>
+
+  <h1>Welcome, Buyer!</h1>
+
+  <div class="tabs">
+    
+    <button class="tab-button active" onclick="showTab('vegetables')">Daily Products</button>
+    <button class="tab-button" onclick="showTab('crops')">Crop</button>
+    <button class="tab-button" onclick="showTab('waste')">Agri Organic Waste</button>
+  </div>
+
+  <!-- Vegetables Tab -->
+  <div class="tab-content active" id="vegetables">
+    <div class="item-grid">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160?text=Tomato" alt="Tomato">
+        <h3>Tomato</h3>
+        <p>Seller: Raju Farmer</p>
+        <p>Address: Nashik, Maharashtra</p>
+        <p>Price: ₹25/kg</p>
+        <p>Quantity available:50kg</p>
+        <div class="ratings">User Rating: ⭐⭐⭐⭐ | Seller Rating: ⭐⭐⭐</div>
+      </div>
+
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160?text=Spinach" alt="Spinach">
+        <h3>Spinach</h3>
+        <p>Seller: Meera Greens</p>
+        <p>Address: Indore, MP</p>
+        <p>Price: ₹18/kg</p>
+        <p>Quantity available:25kg</p>
+        <div class="ratings">User Rating: ⭐⭐⭐⭐½ | Seller Rating: ⭐⭐⭐⭐</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Crops Tab -->
+  <div class="tab-content" id="crops">
+    <div class="item-grid">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160?text=Wheat" alt="Wheat">
+        <h3>Wheat</h3>
+        <p>Seller: Kisan Agro</p>
+        <p>Address: Kota, Rajasthan</p>
+        <p>Price: ₹22/kg</p>
+        <p>Quantity available:5000kg</p>
+        <div class="ratings">User Rating: ⭐⭐⭐ | Seller Rating: ⭐⭐⭐⭐</div>
+      </div>
+
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160?text=Rice" alt="Rice">
+        <h3>Rice</h3>
+        <p>Seller: Sudhir Bhai</p>
+        <p>Address: Raipur, Chhattisgarh</p>
+        <p>Price: ₹30/kg</p>
+        <p>Quantity available:2050kg</p>
+        <div class="ratings">User Rating: ⭐⭐⭐⭐ | Seller Rating: ⭐⭐⭐⭐</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agri Organic Waste Tab -->
+  <div class="tab-content" id="waste">
+    <div class="item-grid">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160?text=Banana+Peels" alt="Banana Peels">
+        <h3>Banana Peels</h3>
+        <p>Seller: BioWaste Hub</p>
+        <p>Address: Varanasi, UP</p>
+        <p>Price: ₹5/kg</p>
+        <p>Quantity available:500kg</p>
+        <div class="ratings">User Rating: ⭐⭐⭐⭐ | Seller Rating: ⭐⭐⭐</div>
+      </div>
+
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160?text=Sugarcane+Pulp" alt="Sugarcane Pulp">
+        <h3>Sugarcane Pulp</h3>
+        <p>Seller: EcoFarms</p>
+        <p>Address: Kolhapur, MH</p>
+        <p>Price: ₹7/kg</p>
+        <p>Quantity available:570kg</p>
+        <div class="ratings">User Rating: ⭐⭐⭐½ | Seller Rating: ⭐⭐⭐⭐</div>
+      </div>
+
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160?text=Sugarcane+Pulp" alt="Sugarcane Pulp">
+        <h3>Rice Straw</h3>
+        <p>Seller: EcoFarms</p>
+        <p>Address: Kolhapur, MH</p>
+        <p>Price: ₹7/kg</p>
+        <p>Quantity available:5702kg</p>
+        <div class="ratings">User Rating: ⭐⭐⭐½ | Seller Rating: ⭐⭐⭐⭐</div>
+      </div>
+
+
+      <div class="card">
+        <img src="https://via.placeholder.com/300x160?text=Sugarcane+Pulp" alt="Sugarcane Pulp">
+        <h3>Wheat Straw</h3>
+        <p>Seller: EcoFarms</p>
+        <p>Address: Kolhapur, MH</p>
+        <p>Price: ₹7/kg</p>
+        <p>Quantity available:570kg</p>
+        <div class="ratings">User Rating: ⭐⭐⭐½ | Seller Rating: ⭐⭐⭐⭐</div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 AgriConnect | Empowering Smart Buyers 🛒
+  </footer>
+
+  <script>
+    function showTab(tabId) {
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
